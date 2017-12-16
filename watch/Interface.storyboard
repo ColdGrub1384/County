@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="13529" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="13507"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="ArialHB.ttc">
+            <string>ArialHebrew-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Counter-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller identifier="Interface" title="Counter" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="watch" customModuleProvider="target">
+                    <items>
+                        <label width="136" height="173" alignment="left" text="0" textAlignment="center" id="G0G-Hi-CVW">
+                            <gestureRecognizers>
+                                <swipeGestureRecognizer direction="4" id="w4T-fA-sSf">
+                                    <connections>
+                                        <action selector="add:" destination="AgC-eL-Hgc" id="7C9-Xd-9qj"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                                <swipeGestureRecognizer direction="8" id="TCC-Xa-emJ">
+                                    <connections>
+                                        <action selector="substract:" destination="AgC-eL-Hgc" id="Qsc-oq-Vvs"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                            </gestureRecognizers>
+                            <fontDescription key="font" name="ArialHebrew-Bold" family="Arial Hebrew" pointSize="67"/>
+                        </label>
+                    </items>
+                    <connections>
+                        <outlet property="countLabel" destination="G0G-Hi-CVW" id="pMh-ye-2SP"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="219.69230769230771" y="344.79487179487182"/>
+        </scene>
+    </scenes>
+</document>
