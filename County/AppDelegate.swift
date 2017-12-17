@@ -8,7 +8,8 @@
 
 import UIKit
 import UserNotifications
-
+import Firebase
+ 
 @UIApplicationMain
  class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -84,7 +85,9 @@ import UserNotifications
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-                
+        
+        FirebaseApp.configure()
+        
         if !FileManager.default.fileExists(atPath: Counter.sharedDir.path) {
             do {
                 try FileManager.default.createDirectory(at: Counter.sharedDir, withIntermediateDirectories: true, attributes: nil)

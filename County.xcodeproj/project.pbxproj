@@ -24,7 +24,11 @@
 		3A8997A71FE6CAA60090F6E1 /* NoCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8997A61FE6CAA60090F6E1 /* NoCountViewController.swift */; };
 		3A8997AA1FE6E6760090F6E1 /* StringError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8997A91FE6E6760090F6E1 /* StringError.swift */; };
 		3A8997AB1FE6E7010090F6E1 /* StringError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8997A91FE6E6760090F6E1 /* StringError.swift */; };
+		3A8997AD1FE709DD0090F6E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A8997AC1FE709DD0090F6E1 /* GoogleService-Info.plist */; };
 		3AA26F7C1FDB4A2F007D0306 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA26F7B1FDB4A2F007D0306 /* Counter.swift */; };
+		58429097DE6FF086C2BFB073 /* Pods_watch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B37CFA1DBF05DFDCC0DA41 /* Pods_watch_Extension.framework */; };
+		7D5EA2532A802BEEABA9C26E /* Pods_County.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2AA63746D7AB53BBBED74D2 /* Pods_County.framework */; };
+		ABC8EF549A09025176800624 /* Pods_watch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B090A2F194043C586D70FBD6 /* Pods_watch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +74,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2A48C8A7AFA4C5BA08141DDE /* Pods-watch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-watch/Pods-watch.debug.xcconfig"; sourceTree = "<group>"; };
 		3A0428C81FDDC4C800CEBE6B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		3A0428CC1FDDCCE700CEBE6B /* watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A0428D11FDDCCE700CEBE6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -92,8 +97,17 @@
 		3A4D04E71FDB44DB0021FC55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A8997A61FE6CAA60090F6E1 /* NoCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCountViewController.swift; sourceTree = "<group>"; };
 		3A8997A91FE6E6760090F6E1 /* StringError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringError.swift; sourceTree = "<group>"; };
+		3A8997AC1FE709DD0090F6E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3AA26F7B1FDB4A2F007D0306 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		3AA26F7D1FDB4D44007D0306 /* County.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = County.entitlements; sourceTree = "<group>"; };
+		85A7EFA575BDC8DD025A6014 /* Pods-County.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-County.debug.xcconfig"; path = "Pods/Target Support Files/Pods-County/Pods-County.debug.xcconfig"; sourceTree = "<group>"; };
+		8EE6F7D2B9C74506D727203E /* Pods-watch Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watch Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-watch Extension/Pods-watch Extension.debug.xcconfig"; sourceTree = "<group>"; };
+		A08E2A2B390759A4AFD44A6B /* Pods-watch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watch Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-watch Extension/Pods-watch Extension.release.xcconfig"; sourceTree = "<group>"; };
+		A6B37CFA1DBF05DFDCC0DA41 /* Pods_watch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_watch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8B124A38365EAC3090063A4 /* Pods-County.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-County.release.xcconfig"; path = "Pods/Target Support Files/Pods-County/Pods-County.release.xcconfig"; sourceTree = "<group>"; };
+		B090A2F194043C586D70FBD6 /* Pods_watch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_watch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4DF74A63369D6C177946764 /* Pods-watch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-watch.release.xcconfig"; path = "Pods/Target Support Files/Pods-watch/Pods-watch.release.xcconfig"; sourceTree = "<group>"; };
+		E2AA63746D7AB53BBBED74D2 /* Pods_County.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_County.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58429097DE6FF086C2BFB073 /* Pods_watch_Extension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,12 +123,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D5EA2532A802BEEABA9C26E /* Pods_County.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAF0F5DA0F647E700B055D58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC8EF549A09025176800624 /* Pods_watch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2ABBDDAC439895B52DF8C3CA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				85A7EFA575BDC8DD025A6014 /* Pods-County.debug.xcconfig */,
+				A8B124A38365EAC3090063A4 /* Pods-County.release.xcconfig */,
+				2A48C8A7AFA4C5BA08141DDE /* Pods-watch.debug.xcconfig */,
+				D4DF74A63369D6C177946764 /* Pods-watch.release.xcconfig */,
+				8EE6F7D2B9C74506D727203E /* Pods-watch Extension.debug.xcconfig */,
+				A08E2A2B390759A4AFD44A6B /* Pods-watch Extension.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3A0428CD1FDDCCE700CEBE6B /* watch */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +189,9 @@
 			children = (
 				3A0428FE1FDEFAA600CEBE6B /* WatchConnectivity.framework */,
 				3A0428FD1FDEFA9A00CEBE6B /* WatchConnectivity.framework */,
+				E2AA63746D7AB53BBBED74D2 /* Pods_County.framework */,
+				B090A2F194043C586D70FBD6 /* Pods_watch.framework */,
+				A6B37CFA1DBF05DFDCC0DA41 /* Pods_watch_Extension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -159,12 +199,14 @@
 		3A4D04CF1FDB44DA0021FC55 = {
 			isa = PBXGroup;
 			children = (
+				3A8997AC1FE709DD0090F6E1 /* GoogleService-Info.plist */,
 				3A0428FA1FDDE7E200CEBE6B /* Shared */,
 				3A4D04DA1FDB44DA0021FC55 /* County */,
 				3A0428CD1FDDCCE700CEBE6B /* watch */,
 				3A0428DC1FDDCCE700CEBE6B /* watch Extension */,
 				3A4D04D91FDB44DA0021FC55 /* Products */,
 				3A0428FC1FDEFA9800CEBE6B /* Frameworks */,
+				2ABBDDAC439895B52DF8C3CA /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -207,8 +249,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A0428EE1FDDCCE700CEBE6B /* Build configuration list for PBXNativeTarget "watch" */;
 			buildPhases = (
+				B2DD1C720EED4AA1B76559EE /* [CP] Check Pods Manifest.lock */,
 				3A0428CA1FDDCCE700CEBE6B /* Resources */,
 				3A0428ED1FDDCCE700CEBE6B /* Embed App Extensions */,
+				FAF0F5DA0F647E700B055D58 /* Frameworks */,
+				6C32FE7278F34470D605C0A9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -224,9 +269,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A0428EA1FDDCCE700CEBE6B /* Build configuration list for PBXNativeTarget "watch Extension" */;
 			buildPhases = (
+				8C1816F00F9864E34C69A3A1 /* [CP] Check Pods Manifest.lock */,
 				3A0428D41FDDCCE700CEBE6B /* Sources */,
 				3A0428D51FDDCCE700CEBE6B /* Frameworks */,
 				3A0428D61FDDCCE700CEBE6B /* Resources */,
+				79940C063B664156CF78F4C2 /* [CP] Embed Pods Frameworks */,
+				2BD9E990E65D002782A62223 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -241,10 +289,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A4D04EA1FDB44DB0021FC55 /* Build configuration list for PBXNativeTarget "County" */;
 			buildPhases = (
+				B1552DEA39ADA1FAECD524C9 /* [CP] Check Pods Manifest.lock */,
 				3A4D04D41FDB44DA0021FC55 /* Sources */,
 				3A4D04D51FDB44DA0021FC55 /* Frameworks */,
 				3A4D04D61FDB44DA0021FC55 /* Resources */,
 				3A0428F11FDDCCE700CEBE6B /* Embed Watch Content */,
+				65539B26F1523BE9EF058087 /* [CP] Embed Pods Frameworks */,
+				55E3F3434E519FC10A758488 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -339,10 +390,134 @@
 			files = (
 				3A4D04E61FDB44DB0021FC55 /* LaunchScreen.storyboard in Resources */,
 				3A4D04E31FDB44DB0021FC55 /* Assets.xcassets in Resources */,
+				3A8997AD1FE709DD0090F6E1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2BD9E990E65D002782A62223 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-watch Extension/Pods-watch Extension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		55E3F3434E519FC10A758488 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-County/Pods-County-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		65539B26F1523BE9EF058087 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-County/Pods-County-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C32FE7278F34470D605C0A9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-watch/Pods-watch-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79940C063B664156CF78F4C2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-watch Extension/Pods-watch Extension-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C1816F00F9864E34C69A3A1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B1552DEA39ADA1FAECD524C9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B2DD1C720EED4AA1B76559EE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3A0428D41FDDCCE700CEBE6B /* Sources */ = {
@@ -399,6 +574,7 @@
 /* Begin XCBuildConfiguration section */
 		3A0428EB1FDDCCE700CEBE6B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8EE6F7D2B9C74506D727203E /* Pods-watch Extension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watch Extension/watch Extension.entitlements";
@@ -418,6 +594,7 @@
 		};
 		3A0428EC1FDDCCE700CEBE6B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A08E2A2B390759A4AFD44A6B /* Pods-watch Extension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "watch Extension/watch Extension.entitlements";
@@ -437,6 +614,7 @@
 		};
 		3A0428EF1FDDCCE700CEBE6B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2A48C8A7AFA4C5BA08141DDE /* Pods-watch.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -456,6 +634,7 @@
 		};
 		3A0428F01FDDCCE700CEBE6B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4DF74A63369D6C177946764 /* Pods-watch.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -582,6 +761,7 @@
 		};
 		3A4D04EB1FDB44DB0021FC55 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85A7EFA575BDC8DD025A6014 /* Pods-County.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = County/County.entitlements;
@@ -598,6 +778,7 @@
 		};
 		3A4D04EC1FDB44DB0021FC55 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8B124A38365EAC3090063A4 /* Pods-County.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = County/County.entitlements;
