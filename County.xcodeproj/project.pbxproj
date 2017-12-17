@@ -21,6 +21,7 @@
 		3A4D04DE1FDB44DA0021FC55 /* CountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D04DD1FDB44DA0021FC55 /* CountViewController.swift */; };
 		3A4D04E31FDB44DB0021FC55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A4D04E21FDB44DB0021FC55 /* Assets.xcassets */; };
 		3A4D04E61FDB44DB0021FC55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4D04E41FDB44DB0021FC55 /* LaunchScreen.storyboard */; };
+		3A8997A71FE6CAA60090F6E1 /* NoCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8997A61FE6CAA60090F6E1 /* NoCountViewController.swift */; };
 		3AA26F7C1FDB4A2F007D0306 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA26F7B1FDB4A2F007D0306 /* Counter.swift */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,7 @@
 		3A4D04E21FDB44DB0021FC55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A4D04E51FDB44DB0021FC55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A4D04E71FDB44DB0021FC55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A8997A61FE6CAA60090F6E1 /* NoCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCountViewController.swift; sourceTree = "<group>"; };
 		3AA26F7B1FDB4A2F007D0306 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		3AA26F7D1FDB4D44007D0306 /* County.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = County.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,12 +179,21 @@
 			children = (
 				3AA26F7D1FDB4D44007D0306 /* County.entitlements */,
 				3A4D04DB1FDB44DA0021FC55 /* AppDelegate.swift */,
-				3A4D04DD1FDB44DA0021FC55 /* CountViewController.swift */,
+				3A8997A81FE6CDBF0090F6E1 /* View Controllers */,
 				3A4D04E21FDB44DB0021FC55 /* Assets.xcassets */,
 				3A4D04E41FDB44DB0021FC55 /* LaunchScreen.storyboard */,
 				3A4D04E71FDB44DB0021FC55 /* Info.plist */,
 			);
 			path = County;
+			sourceTree = "<group>";
+		};
+		3A8997A81FE6CDBF0090F6E1 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A4D04DD1FDB44DA0021FC55 /* CountViewController.swift */,
+				3A8997A61FE6CAA60090F6E1 /* NoCountViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A8997A71FE6CAA60090F6E1 /* NoCountViewController.swift in Sources */,
 				3A4D04DE1FDB44DA0021FC55 /* CountViewController.swift in Sources */,
 				3A4D04DC1FDB44DA0021FC55 /* AppDelegate.swift in Sources */,
 				3AA26F7C1FDB4A2F007D0306 /* Counter.swift in Sources */,

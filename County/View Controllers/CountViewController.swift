@@ -109,8 +109,8 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     // MARK: UIViewController
     // -------------------------------------------------------------------------
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         CountViewController.shared = self
         
@@ -339,7 +339,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         counter.remove()
         AppDelegate.shared.currentCounter = 0
         if Counter.counters.count == 0 {
-            UIApplication.shared.keyWindow?.rootViewController = nil
+            UIApplication.shared.keyWindow?.rootViewController = NoCountViewController()
         } else {
             let counterVC = CountViewController()
             counterVC.startAnimations = [.recount]
