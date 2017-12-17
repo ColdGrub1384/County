@@ -22,6 +22,8 @@
 		3A4D04E31FDB44DB0021FC55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A4D04E21FDB44DB0021FC55 /* Assets.xcassets */; };
 		3A4D04E61FDB44DB0021FC55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4D04E41FDB44DB0021FC55 /* LaunchScreen.storyboard */; };
 		3A8997A71FE6CAA60090F6E1 /* NoCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8997A61FE6CAA60090F6E1 /* NoCountViewController.swift */; };
+		3A8997AA1FE6E6760090F6E1 /* StringError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8997A91FE6E6760090F6E1 /* StringError.swift */; };
+		3A8997AB1FE6E7010090F6E1 /* StringError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8997A91FE6E6760090F6E1 /* StringError.swift */; };
 		3AA26F7C1FDB4A2F007D0306 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA26F7B1FDB4A2F007D0306 /* Counter.swift */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +91,7 @@
 		3A4D04E51FDB44DB0021FC55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A4D04E71FDB44DB0021FC55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A8997A61FE6CAA60090F6E1 /* NoCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCountViewController.swift; sourceTree = "<group>"; };
+		3A8997A91FE6E6760090F6E1 /* StringError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringError.swift; sourceTree = "<group>"; };
 		3AA26F7B1FDB4A2F007D0306 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		3AA26F7D1FDB4D44007D0306 /* County.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = County.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				3AA26F7B1FDB4A2F007D0306 /* Counter.swift */,
+				3A8997A91FE6E6760090F6E1 /* StringError.swift */,
 				3A0428C81FDDC4C800CEBE6B /* Colors.swift */,
 			);
 			path = Shared;
@@ -345,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A8997AB1FE6E7010090F6E1 /* StringError.swift in Sources */,
 				3A0428FB1FDDE7EB00CEBE6B /* Counter.swift in Sources */,
 				3A0428E01FDDCCE700CEBE6B /* ExtensionDelegate.swift in Sources */,
 				3A0428DE1FDDCCE700CEBE6B /* InterfaceController.swift in Sources */,
@@ -359,6 +364,7 @@
 				3A8997A71FE6CAA60090F6E1 /* NoCountViewController.swift in Sources */,
 				3A4D04DE1FDB44DA0021FC55 /* CountViewController.swift in Sources */,
 				3A4D04DC1FDB44DA0021FC55 /* AppDelegate.swift in Sources */,
+				3A8997AA1FE6E6760090F6E1 /* StringError.swift in Sources */,
 				3AA26F7C1FDB4A2F007D0306 /* Counter.swift in Sources */,
 				3A0428C91FDDC4C800CEBE6B /* Colors.swift in Sources */,
 			);

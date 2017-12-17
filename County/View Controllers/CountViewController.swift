@@ -119,6 +119,8 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         WCSession.default.delegate = self
         WCSession.default.activate()
         
+        AppDelegate.shared.updateShortcutItems()
+        
         // Count label
         countLabel = UILabel(frame: CGRect(x :0, y: 0, width: UIScreen.main.bounds.size.width, height: 160))
         countLabel.text = "\(counter.count)"
@@ -339,6 +341,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         counter.remove()
         AppDelegate.shared.currentCounter = 0
         if Counter.counters.count == 0 {
+            AppDelegate.shared.updateShortcutItems()
             UIApplication.shared.keyWindow?.rootViewController = NoCountViewController()
         } else {
             let counterVC = CountViewController()
@@ -358,10 +361,29 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         }
         
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-            self.counter.name = alert.textFields![0].text!
-            self.titleLabel.text = self.counter.name
-            self.tabsCollectionView.reloadData()
-            self.sendToWatch()
+            let newName = alert.textFields![0].text!
+            
+            // Check if this name already exists
+            var continue_ = true
+            for counter in Counter.counters {
+                if counter.name == newName {
+                    
+                    let alert = UIAlertController(title: "Cannot rename counter!", message: "A counter called \(newName) already exists.\nPlease select another name.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    
+                    continue_ = false
+                    break
+                }
+            }
+            
+            // Apply changes
+            if continue_ {
+                self.counter.name = newName
+                self.titleLabel.text = self.counter.name
+                self.tabsCollectionView.reloadData()
+                self.sendToWatch()
+                AppDelegate.shared.updateShortcutItems()
+            }
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -399,6 +421,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         tabsCollectionView.reloadData()
         animation(for: .add)
         sendToWatch()
+        AppDelegate.shared.updateShortcutItems()
     }
     
     @objc func substract(_ sender: UISwipeGestureRecognizer) { // Substract
@@ -406,6 +429,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         tabsCollectionView.reloadData()
         animation(for: .substract)
         sendToWatch()
+        AppDelegate.shared.updateShortcutItems()
     }
     
     @objc func changeColor(_ sender: UISwipeGestureRecognizer) { // Change counter color

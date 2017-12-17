@@ -92,6 +92,24 @@ class Counter: NSObject {
     // -------------------------------------------------------------------------
     
     // Configure counter
+    
+    init(file: URL) throws {
+        let content = try String(contentsOf: file, encoding: .utf8).components(separatedBy: "\n")
+        if content.count != 2 {
+            
+        }
+        
+        let cannotReadData = StringError("Cannot read data from \(file.absoluteString).")
+        
+        guard let count = Int(content[0]) else { throw cannotReadData }
+        guard let backColor = Int(content[1]) else { throw cannotReadData }
+        
+        self.name_ = file.lastPathComponent
+        self.oldName = file.lastPathComponent
+        self.count_ = count
+        self.color_ = Color(from: backColor)
+    }
+    
     init(name: String, count: Int, color: UIColor) {
         self.name_ = name
         self.oldName = name

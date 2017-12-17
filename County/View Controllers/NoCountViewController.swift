@@ -13,10 +13,12 @@ class NoCountViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
         view.backgroundColor = .white
         
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
-        label.text = "Tap to create new counter"
+        label.text = "Tap to create a new counter"
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textAlignment = .center
         
