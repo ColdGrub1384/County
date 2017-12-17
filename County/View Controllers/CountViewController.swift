@@ -247,7 +247,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
                 subview.removeFromSuperview()
             }
             
-            self.viewDidAppear(true)
+            self.viewDidLoad()
         })
     }
     
