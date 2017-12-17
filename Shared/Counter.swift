@@ -32,7 +32,6 @@ class Counter: NSObject {
         get {
             var counters_ = [Counter]()
             do {
-                print(sharedDir.absoluteString)
                 let files = try FileManager.default.contentsOfDirectory(at: sharedDir, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) // Counter files
                 // Parse files and add to array
                 for file in files {

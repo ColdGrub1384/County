@@ -8,8 +8,9 @@
 
 import UIKit
 import WatchConnectivity
+import GoogleMobileAds
 
-class CountViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, WCSessionDelegate {
+class CountViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, WCSessionDelegate, GADBannerViewDelegate {
     
     var countLabel: UILabel!
     var titleLabel: UILabel!
@@ -19,6 +20,9 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     var leftGesture: UISwipeGestureRecognizer!
     var rightGesture: UISwipeGestureRecognizer!
     var tabsCollectionView: UICollectionView!
+    var adBanner: GADBannerView!
+    var interceptBannerClick: UIView!
+    var adView: UIVisualEffectView!
     var startAnimations = [Animation.recount, Animation.firstLaunch]
     var counter = Counter.counters[AppDelegate.shared.currentCounter]
     
@@ -106,6 +110,18 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     // -------------------------------------------------------------------------
+    // MARK: GADBannerViewDelegate
+    // -------------------------------------------------------------------------
+    
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print("Failed to receive ad: \(error.localizedDescription)")
+    }
+    
+    func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
+        closeMaximizedAd()
+    }
+    
+    // -------------------------------------------------------------------------
     // MARK: UIViewController
     // -------------------------------------------------------------------------
     
@@ -180,15 +196,36 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         tabsCollectionView.dataSource = self
         tabsCollectionView.backgroundColor = .clear
         
+        // Ad banner
+        adBanner = GADBannerView(adSize: kGADAdSizeBanner)
+        adBanner.center.x = view.center.x
+        adBanner.rootViewController = self
+        adBanner.adUnitID = "ca-app-pub-9214899206650515/7728559868"
+        adBanner.delegate = self
+        adBanner.load(GADRequest())
+        // Portrait
+        if orientation == .portrait || orientation == .portraitUpsideDown {
+            adBanner.frame.origin.y = UIScreen.main.bounds.height-(140+adBanner.frame.size.height)
+            
+        } else { // Landscape
+            adBanner.frame.origin.y = UIScreen.main.bounds.height-adBanner.frame.size.height
+        }
+        interceptBannerClick = UIView(frame: adBanner.frame)
+        interceptBannerClick.backgroundColor = .clear
+        interceptBannerClick.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showAd)))
+
         // Add subviews
         view.addSubview(countLabel)
         view.addSubview(titleLabel)
         view.addSubview(editTitle)
         view.addSubview(tabsCollectionView)
+        view.addSubview(adBanner)
+        view.addSubview(interceptBannerClick)
         view.addGestureRecognizer(addGesture)
         view.addGestureRecognizer(substractGesture)
         view.addGestureRecognizer(leftGesture)
         view.addGestureRecognizer(rightGesture)
+        
         view.backgroundColor = counter.color
         view.isUserInteractionEnabled = true
         
@@ -453,6 +490,32 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
                 self.view.backgroundColor = newColor
             })
         }
+    }
+    
+    @objc func showAd() { // Maximize ad
+        
+        adView = UIVisualEffectView(frame: view.frame)
+        adView.effect = UIBlurEffect(style: .light)
+        
+        view.addSubview(adView)
+        
+        let navBar = UINavigationBar(frame: CGRect(x: adBanner.frame.origin.x, y: adBanner.frame.origin.y-40, width: adBanner.frame.width, height: 40))
+        let topItem = UINavigationItem(title: "Sponsored")
+        
+        let close = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeMaximizedAd))
+        topItem.rightBarButtonItem = close
+        navBar.setItems([topItem], animated: true)
+        
+        adBanner.removeFromSuperview()
+        adView.contentView.addSubview(adBanner)
+        adView.contentView.addSubview(navBar)
+    }
+
+    @objc func closeMaximizedAd() { // Close maximized ad
+        adBanner.removeFromSuperview()
+        adView.removeFromSuperview()
+        view.addSubview(adBanner)
+        view.bringSubview(toFront: interceptBannerClick)
     }
     
 }

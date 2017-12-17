@@ -87,6 +87,7 @@ import Firebase
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-9214899206650515~9762275389")
         
         if !FileManager.default.fileExists(atPath: Counter.sharedDir.path) {
             do {

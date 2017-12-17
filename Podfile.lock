@@ -1,4 +1,7 @@
 PODS:
+  - Firebase/AdMob (4.1.1):
+    - Firebase/Core
+    - Google-Mobile-Ads-SDK (= 7.23.0)
   - Firebase/Core (4.1.1):
     - FirebaseAnalytics (= 4.0.3)
     - FirebaseCore (= 4.0.6)
@@ -12,6 +15,7 @@ PODS:
     - nanopb (~> 0.3)
   - FirebaseInstanceID (2.0.2):
     - FirebaseCore (~> 4.0)
+  - Google-Mobile-Ads-SDK (7.23.0)
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
@@ -22,6 +26,7 @@ PODS:
   - nanopb/encode (0.3.8)
 
 DEPENDENCIES:
+  - Firebase/AdMob
   - Firebase/Core
 
 SPEC CHECKSUMS:
@@ -29,9 +34,10 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: 76f754d37ca5b04f36856729b6af3ca0152d1069
   FirebaseCore: 28def3c643989c97ea5a69ea5000f5fa9902b9fd
   FirebaseInstanceID: c4c7fca62c7b7330caee5da04f19a37ea37bb1c1
+  Google-Mobile-Ads-SDK: a43dc8efdb566c74d00ac6934c781de969348d80
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
 
-PODFILE CHECKSUM: 04e86be7319e7f593c9ea54f12b9ededcae1800f
+PODFILE CHECKSUM: 2db6c879671469d81e280e021a8a8c905214c927
 
 COCOAPODS: 1.2.1

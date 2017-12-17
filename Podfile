@@ -7,6 +7,7 @@ target 'County' do
 
   # Pods for County
   pod 'Firebase/Core'
+  pod 'Firebase/AdMob'
 end
 
 target 'watch' do
