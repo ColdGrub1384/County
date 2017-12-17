@@ -32,6 +32,8 @@ import UserNotifications
         
         let counterVC = CountViewController()
         
+        counterVC.startAnimations = [.recount]
+        
         UIApplication.shared.keyWindow?.rootViewController = counterVC
         UIApplication.shared.applicationIconBadgeNumber = counter.count
         

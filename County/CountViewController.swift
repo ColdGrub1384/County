@@ -19,7 +19,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     var leftGesture: UISwipeGestureRecognizer!
     var rightGesture: UISwipeGestureRecognizer!
     var tabsCollectionView: UICollectionView!
-    var startAnimation = Animation.recount
+    var startAnimations = [Animation.recount, Animation.firstLaunch]
     var counter = Counter.counters[AppDelegate.shared.currentCounter]
     
     // -------------------------------------------------------------------------
@@ -32,6 +32,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         case recount
         case add
         case substract
+        case firstLaunch
         case none
     }
     
@@ -72,9 +73,9 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         counterVC.counter = counter
         
         if self.counter.count < counter.count {
-            counterVC.startAnimation = .add
+            counterVC.startAnimations = [.add]
         } else {
-            counterVC.startAnimation = .substract
+            counterVC.startAnimations = [.substract]
         }
         
         // Open counter
@@ -117,13 +118,12 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         WCSession.default.activate()
         
         // Count label
-        countLabel = UILabel(frame: CGRect(x :0, y: 0, width: UIScreen.main.bounds.size.width, height: 200))
+        countLabel = UILabel(frame: CGRect(x :0, y: 0, width: UIScreen.main.bounds.size.width, height: 150))
         countLabel.text = "\(counter.count)"
         countLabel.textColor = .white
         countLabel.font = UIFont.boldSystemFont(ofSize: 150)
-        countLabel.center = view.center
         countLabel.textAlignment = .center
-        
+        countLabel.center = view.center
         
         // Counter title label
         titleLabel = UILabel(frame: CGRect(x: 0, y: 30, width: UIScreen.main.bounds.size.width, height: 30))
@@ -180,16 +180,35 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         view.backgroundColor = counter.color
         view.isUserInteractionEnabled = true
         
+        
         // Start animation
-        if startAnimation == .recount {
+        
+        if startAnimations.contains(.firstLaunch) {
+            let animView = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+            animView.backgroundColor = view.backgroundColor
+            view.insertSubview(animView, at: 0)
+            
+            view.backgroundColor = .white
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                animView.frame.origin.y = 0
+            })
+            
+            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+                self.view.backgroundColor = animView.backgroundColor
+                animView.removeFromSuperview()
+            })
+        }
+        
+        if startAnimations.contains(.recount) {
             AppDelegate.shared.animation(forLabel: countLabel, withCounter: counter, andDuration: 1)
         }
         
-        if startAnimation == .add {
+        if startAnimations.contains(.add) {
             animation(for: .add)
         }
         
-        if startAnimation == .substract {
+        if startAnimations.contains(.substract) {
             animation(for: .substract)
         }
     }
@@ -208,6 +227,18 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
             
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) { // Reload subviews when change device orientation
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+            self.startAnimations = []
+            
+            for subview in self.view.subviews {
+                subview.removeFromSuperview()
+            }
+            
+            self.viewDidLoad()
+        })
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -292,7 +323,10 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         if Counter.counters.count == 0 {
             UIApplication.shared.keyWindow?.rootViewController = nil
         } else {
-            UIApplication.shared.keyWindow?.rootViewController = CountViewController()
+            let counterVC = CountViewController()
+            counterVC.startAnimations = [.recount]
+            
+            UIApplication.shared.keyWindow?.rootViewController = counterVC
         }
         
     }
@@ -378,7 +412,6 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
             })
         }
     }
-    
     
 }
 
