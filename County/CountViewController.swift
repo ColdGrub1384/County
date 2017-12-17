@@ -109,16 +109,18 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     // MARK: UIViewController
     // -------------------------------------------------------------------------
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         CountViewController.shared = self
+        
+        let orientation = UIApplication.shared.statusBarOrientation
         
         WCSession.default.delegate = self
         WCSession.default.activate()
         
         // Count label
-        countLabel = UILabel(frame: CGRect(x :0, y: 0, width: UIScreen.main.bounds.size.width, height: 150))
+        countLabel = UILabel(frame: CGRect(x :0, y: 0, width: UIScreen.main.bounds.size.width, height: 160))
         countLabel.text = "\(counter.count)"
         countLabel.textColor = .white
         countLabel.font = UIFont.boldSystemFont(ofSize: 150)
@@ -160,9 +162,17 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         // Tabs
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 200, height: 140)
-        layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 5
-        tabsCollectionView = UICollectionView(frame: CGRect(x: 0, y: UIScreen.main.bounds.size.height-140, width: UIScreen.main.bounds.size.width, height: 140), collectionViewLayout: layout)
+        layout.minimumInteritemSpacing = 5
+        if orientation == .portrait || orientation == .portraitUpsideDown { // Portrait
+            // Display tabs at bottom
+            layout.scrollDirection = .horizontal
+            tabsCollectionView = UICollectionView(frame: CGRect(x: 0, y: UIScreen.main.bounds.size.height-140, width: UIScreen.main.bounds.size.width, height: 140), collectionViewLayout: layout)
+        } else { // Landscape
+            // Display tabs at right
+            layout.scrollDirection = .vertical
+            tabsCollectionView = UICollectionView(frame: CGRect(x: UIScreen.main.bounds.size.width-200, y: 0, width: 200, height: UIScreen.main.bounds.size.height), collectionViewLayout: layout)
+        }
         tabsCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "collectionCell")
         tabsCollectionView.delegate = self
         tabsCollectionView.dataSource = self
@@ -182,7 +192,6 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         
         // Start animation
-        
         if startAnimations.contains(.firstLaunch) {
             let animView = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
             animView.backgroundColor = view.backgroundColor
@@ -232,12 +241,11 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) { // Reload subviews when change device orientation
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
             self.startAnimations = []
-            
             for subview in self.view.subviews {
                 subview.removeFromSuperview()
             }
             
-            self.viewDidLoad()
+            self.viewDidAppear(true)
         })
     }
     
@@ -254,6 +262,9 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell { // Tab
+        
+        let orientation = UIApplication.shared.statusBarOrientation
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath as IndexPath)
         
         cell.backgroundColor = .clear
@@ -280,8 +291,15 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         // Add subviews
         cell.addSubview(countLabel)
         cell.addSubview(titleBar)
-        countLabel.frame.origin.y = 45
-        countLabel.frame.origin.x -= CGFloat(205*indexPath.row)
+        
+        countLabel.center = cell.center
+        
+        if orientation == .portrait || orientation == .portraitUpsideDown {
+            countLabel.frame.origin.y = 45
+            countLabel.frame.origin.x -= CGFloat(205*indexPath.row)
+        } else {
+            countLabel.frame.origin.y -= CGFloat(145*indexPath.row)
+        }
         
         // If the tab is not the last, put content of the counter, else, the tab is used to add a new counter
         if indexPath.row != collectionView.numberOfItems(inSection: 0)-1 {
