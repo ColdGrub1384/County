@@ -15,6 +15,8 @@ import Firebase
     
     var window: UIWindow?
     
+    var adBanner: GADBannerView!
+    
     static let shared = AppDelegate()
     
     var currentCounter: Int { // Current selected counter
