@@ -101,7 +101,7 @@ import Firebase
         
         do {
             if try FileManager.default.contentsOfDirectory(atPath: Counter.sharedDir.path) == [] {
-                FileManager.default.createFile(atPath: Counter.sharedDir.appendingPathComponent("Counter").path, contents: "0\n3".data(using: .utf8), attributes: nil)
+                FileManager.default.createFile(atPath: Counter.sharedDir.appendingPathComponent(Strings.counter).path, contents: "0\n3".data(using: .utf8), attributes: nil)
             }
         } catch _ {}
         

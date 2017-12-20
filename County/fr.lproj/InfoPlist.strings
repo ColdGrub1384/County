@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  County
+
+  Created by Adrian on 20.12.17.
+  Copyright © 2017 Adrian. All rights reserved.
+*/
+
+"UIApplicationShortcutItemTitle" = "Ajouter un compteur";

@@ -274,11 +274,11 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) { // Reset counter to 0
         if motion == .motionShake {
-            let alert = UIAlertController(title: "Reset?", message: "Do you want to reset to 0 your count?", preferredStyle: .alert)
+            let alert = UIAlertController(title: Strings.ResetAlert.title, message: Strings.ResetAlert.message, preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: Strings.no, style: .cancel, handler: nil))
             
-            alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (alert) in
+            alert.addAction(UIAlertAction(title: Strings.yes, style: .destructive, handler: { (alert) in
                 self.counter.count = 0
                 self.tabsCollectionView.reloadData()
                 self.sendToWatch()
@@ -330,7 +330,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         // Title
         let titleBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
-        let navItem = UINavigationItem(title: "Add new")
+        let navItem = UINavigationItem(title: Strings.addNew)
         titleBar.setItems([navItem], animated: true)
         
         // Remove all subviews
@@ -375,7 +375,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         if indexPath.row != collectionView.numberOfItems(inSection: 0)-1 { // Open selected counter
             AppDelegate.shared.switchToCounter(Counter.counters[indexPath.row])
         } else { // Create new counter
-            let newCounter = Counter(name: "Counter \(indexPath.row+1)", count: 0, color: view.backgroundColor!)
+            let newCounter = Counter(name: "\(Strings.counter) \(indexPath.row+1)", count: 0, color: view.backgroundColor!)
             Counter.create(counter: newCounter)
             AppDelegate.shared.switchToCounter(newCounter)
         }
@@ -401,10 +401,10 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     @objc func editCounterTitle() { // Edit counter title
-        let alert = UIAlertController(title: "Change title", message: "Type new title for \(counter.name)", preferredStyle: .alert)
+        let alert = UIAlertController(title: Strings.ChangeTitleAlert.title, message: Strings.ChangeTitleAlert.message(forCounter: counter.name), preferredStyle: .alert)
         
         alert.addTextField { (textfield) in
-            textfield.placeholder = "New title"
+            textfield.placeholder = Strings.ChangeTitleAlert.placeholder
             textfield.text = self.counter.name
         }
         
@@ -416,7 +416,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
             for counter in Counter.counters {
                 if counter.name == newName {
                     
-                    let alert = UIAlertController(title: "Cannot rename counter!", message: "A counter called \(newName) already exists.\nPlease select another name.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: Strings.CannotRenameCounter.title, message: Strings.CannotRenameCounter.message(forCounter: counter.name), preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                     
                     continue_ = false
@@ -434,7 +434,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
             }
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: Strings.cancel, style: .cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
     }
@@ -511,7 +511,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         view.addSubview(adView)
         
         let navBar = UINavigationBar(frame: CGRect(x: AppDelegate.shared.adBanner.frame.origin.x, y: AppDelegate.shared.adBanner.frame.origin.y-40, width: AppDelegate.shared.adBanner.frame.width, height: 40))
-        let topItem = UINavigationItem(title: "Sponsored")
+        let topItem = UINavigationItem(title: Strings.sponsored)
         
         let close = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(closeMaximizedAd))
         topItem.rightBarButtonItem = close

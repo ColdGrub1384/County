@@ -70,7 +70,7 @@ class Counter: NSObject {
     #else
     static var shared: Counter { // Returns the only counter saved to the disk
         get {
-            return Counter(name: Counter.userDefaults.string(forKey: "name") ?? "Counter", count: userDefaults.integer(forKey: "count"), color: Color(from: (userDefaults.value(forKey: "color") as? Int) ?? 3) )
+            return Counter(name: Counter.userDefaults.string(forKey: "name") ?? Strings.counter, count: userDefaults.integer(forKey: "count"), color: Color(from: (userDefaults.value(forKey: "color") as? Int) ?? 3) )
         }
         
         set {

@@ -18,7 +18,7 @@ class NoCountViewController: UIViewController {
         view.backgroundColor = .white
         
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
-        label.text = "Tap to create a new counter"
+        label.text = Strings.noCounter
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textAlignment = .center
         
@@ -38,7 +38,7 @@ class NoCountViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let counter = Counter(name: "Counter", count: 0, color: Color(from: 3))
+        let counter = Counter(name: Strings.counter, count: 0, color: Color(from: 3))
         Counter.create(counter: counter)
         
         UIApplication.shared.keyWindow?.rootViewController = CountViewController()
