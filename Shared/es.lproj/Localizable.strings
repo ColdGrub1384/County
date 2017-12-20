@@ -32,7 +32,7 @@
 "counter" = "Contador";
 
 /* Text shown when there is no counter */
-"createFirstCounter" = "Toque la pantalla para crear un nuevo contador";
+"createFirstCounter" = "Toque para crear un nuevo contador";
 
 /* No comment provided by the engineer. */
 "no" = "No";
