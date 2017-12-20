@@ -1,5 +1,5 @@
 
-![Rounded Icon](https://raw.githubusercontent.com/ColdGrub1384/County/master/RoundedIcon.png)
+![Icon](https://raw.githubusercontent.com/ColdGrub1384/County/master/County/Assets.xcassets/AppIcon.appiconset/ItunesArtwork@2x.png)
 
 # County - iOS and Apple Watch Counter
 
