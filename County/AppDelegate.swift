@@ -133,7 +133,7 @@ import Firebase
                 UIApplication.shared.keyWindow?.rootViewController = CountViewController()
             } catch _ {}
         } else if shortcutItem.type == "createNew" { // Create new counter
-            let newCounter = Counter(name: "Counter \(Counter.counters.count+1)", count: 0, color: Color(from: 3))
+            let newCounter = Counter(name: "\(Strings.counter) \(Counter.counters.count+1)", count: 0, color: Color(from: 3))
             Counter.create(counter: newCounter)
             
             self.currentCounter = newCounter.row
