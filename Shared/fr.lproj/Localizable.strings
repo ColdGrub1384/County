@@ -6,6 +6,8 @@
  Copyright © 2017 Adrian. All rights reserved.
  */
 
+/* Add new group tab title */
+"addGroup" = "Ajouter une groupe";
 
 /* Add new counter tab title */
 "addNew" = "Ajouter";
@@ -33,6 +35,12 @@
 
 /* Text shown when there is no counter */
 "createFirstCounter" = "Touche pour créer un nouveau conteur";
+
+/* Group of counters */
+"group" = "Groupe";
+
+/* No comment provided by the engineer. */
+"in" = "Dans";
 
 /* No comment provided by the engineer. */
 "no" = "Non";

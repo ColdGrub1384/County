@@ -6,6 +6,8 @@
  Copyright © 2017 Adrian. All rights reserved.
  */
 
+/* Add new group tab title */
+"addGroup" = "Agregar grupo";
 
 /* Add new counter tab title */
 "addNew" = "Agregar";
@@ -33,6 +35,12 @@
 
 /* Text shown when there is no counter */
 "createFirstCounter" = "Toque para crear un nuevo contador";
+
+/* Group of counters */
+"group" = "Grupo";
+
+/* No comment provided by the engineer. */
+"in" = "En";
 
 /* No comment provided by the engineer. */
 "no" = "No";

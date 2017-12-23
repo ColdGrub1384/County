@@ -14,9 +14,12 @@ class Strings {
     static let yes = NSLocalizedString("yes", comment: "")
     static let no = NSLocalizedString("no", comment: "")
     static let cancel = NSLocalizedString("cancel", comment: "")
+    static let `in` = NSLocalizedString("in", comment: "")
     
     static let counter = NSLocalizedString("counter", comment: "Default counter title")
     static let addNew = NSLocalizedString("addNew", comment: "Add new counter tab title")
+    static let addGroup = NSLocalizedString("addGroup", comment: "Add new group tab title")
+    static let group = NSLocalizedString("group", comment: "Group of counters")
     
     static let sponsored = NSLocalizedString("sponsored", comment: "Title for maximized ad")
     

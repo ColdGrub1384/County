@@ -102,8 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             var lastSubtitle: String?
             if let parent = counter.parent {
-                // TODO: Translate "In"
-                lastSubtitle = "In \(parent.name)"
+                lastSubtitle = "\(Strings.in) \(parent.name)"
             }
             
             newItem.localizedSubtitle = lastSubtitle

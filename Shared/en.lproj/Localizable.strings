@@ -6,6 +6,9 @@
    Copyright © 2017 Adrian. All rights reserved.
  */
 
+/* Add new group tab title */
+"addGroup" = "Add group";
+
 /* Add new counter tab title */
 "addNew" = "Add new";
 
@@ -33,11 +36,17 @@
 /* Text shown when there is no counter */
 "createFirstCounter" = "Tap to create a new counter";
 
-/* Message for alert to reset counter */
-"resetAlert.message" = "Do you want to reset to 0 your count?";
+/* Group of counters */
+"group" = "Group";
+
+/* No comment provided by the engineer. */
+"in" = "In";
 
 /* No comment provided by the engineer. */
 "no" = "No";
+
+/* Message for alert to reset counter */
+"resetAlert.message" = "Do you want to reset to 0 your count?";
 
 /* Title for alert to reset counter */
 "resetAlert.title" = "Reset?";

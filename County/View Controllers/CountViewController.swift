@@ -408,9 +408,8 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
             countLabel.text = "+"
             navItem.title = Strings.addNew
         } else if indexPath.row == counters.count+1 { // Add new group
-            // TODO: Translate title
             countLabel.text = "+"
-            navItem.title = "Add group"
+            navItem.title = Strings.addGroup
         } else { // Open counter
             if indexPath.row == self.counter.row {
                 let closeItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(remove))
@@ -454,7 +453,6 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
             AppDelegate.shared.switchToCounter(newCounter)
         } else { // Create group
             
-            // TODO: Translate "Group"
             // FIXME: Fix row, use count of groups
             
             var dir = Counter.sharedDir
@@ -463,9 +461,9 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
             }
             
             do {
-                try FileManager.default.createDirectory(atPath: dir.appendingPathComponent("Group \(indexPath.row+1)").path, withIntermediateDirectories: false, attributes: nil)
+                try FileManager.default.createDirectory(atPath: dir.appendingPathComponent("\(Strings.group) \(indexPath.row+1)").path, withIntermediateDirectories: false, attributes: nil)
                 
-                let newCounter = try Counter(file: dir.appendingPathComponent("Group \(indexPath.row+1)"))
+                let newCounter = try Counter(file: dir.appendingPathComponent("\(Strings.group) \(indexPath.row+1)"))
                 
                 AppDelegate.shared.switchToCounter(newCounter)
                 
