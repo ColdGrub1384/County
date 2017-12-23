@@ -270,7 +270,9 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         tabsCollectionView.backgroundColor = .clear
         
         // Add subviews
-        view.addSubview(countLabel)
+        if !counter.isGroup {
+            view.addSubview(countLabel)
+        }
         view.addSubview(titleLabel)
         view.addSubview(editTitle)
         view.addSubview(tabsCollectionView)
@@ -422,6 +424,17 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
                 countLabel.text = "\(counters[indexPath.row].count)"
                 titleBar.topItem?.title = counters[indexPath.row].name
                 cell.backgroundColor = counters[indexPath.row].color
+                
+                if counters[indexPath.row].isGroup {
+                    let folderView = UIImageView(frame: CGRect(x: 0, y: 40, width: cell.frame.width, height: cell.frame.height-40))
+                    folderView.image = #imageLiteral(resourceName: "folder")
+                    folderView.tintColor = .white
+                    folderView.contentMode = .scaleAspectFit
+                    cell.addSubview(folderView)
+                    
+                    countLabel.frame.origin.y += 7.5
+                    countLabel.font = UIFont.boldSystemFont(ofSize: 70)
+                }
             }
         }
         
