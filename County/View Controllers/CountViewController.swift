@@ -23,8 +23,11 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     var interceptBannerClick: UIView!
     var adView: UIVisualEffectView!
     var counterView: UIView!
+    var goBack: UIButton?
+    var removeGroup: UIButton?
     var startAnimations = [Animation.recount, Animation.firstLaunch]
-    var counter = Counter.counters[AppDelegate.shared.currentCounter]
+    var counter: Counter!
+    var counters = [Counter]()
     
     // -------------------------------------------------------------------------
     // MARK: Static declarations
@@ -128,6 +131,29 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if counter == nil {
+            if let currentGroup = AppDelegate.shared.currentGroup {
+                if AppDelegate.shared.currentCounter != -1 {
+                    counter = Counter.counters(atDirectory: URL(string:currentGroup)!)[AppDelegate.shared.currentCounter]
+                } else {
+                    do {
+                        counter = try Counter(file: URL(string:currentGroup)!)
+                    } catch  {}
+                }
+            } else {
+                counter = Counter.counters[AppDelegate.shared.currentCounter]
+            }
+            
+        }
+        
+        if counter.isGroup {
+            counters = counter.childs
+        } else if let parent = counter.parent {
+            counters = parent.childs
+        } else {
+            counters = Counter.counters
+        }
+        
         CountViewController.shared = self
         
         let orientation = UIApplication.shared.statusBarOrientation
@@ -170,6 +196,44 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         editTitle.center.x = counterView.center.x
         editTitle.addTarget(self, action: #selector(editCounterTitle), for: .touchUpInside)
         
+        // Ad banner
+        if AppDelegate.shared.adBanner == nil {
+            AppDelegate.shared.adBanner = GADBannerView(adSize: kGADAdSizeBanner)
+            AppDelegate.shared.adBanner.rootViewController = self
+            AppDelegate.shared.adBanner.adUnitID = "ca-app-pub-9214899206650515/7728559868"
+            AppDelegate.shared.adBanner.load(GADRequest())
+        }
+        AppDelegate.shared.adBanner.delegate = self
+        AppDelegate.shared.adBanner.center.x = counterView.center.x
+        // Portrait
+        if orientation == .portrait || orientation == .portraitUpsideDown {
+            AppDelegate.shared.adBanner.frame.origin.y = UIScreen.main.bounds.height-(140+AppDelegate.shared.adBanner.frame.size.height)
+            
+        } else { // Landscape
+            AppDelegate.shared.adBanner.frame.origin.y = UIScreen.main.bounds.height-AppDelegate.shared.adBanner.frame.size.height
+        }
+        interceptBannerClick = UIView(frame: AppDelegate.shared.adBanner.frame)
+        interceptBannerClick.backgroundColor = .clear
+        interceptBannerClick.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showAd)))
+
+        // Exit from group
+        if counter.isGroup || counter.parent != nil {
+            goBack = UIButton(frame: CGRect(x: 20, y: 90, width: 60, height: 60))
+            goBack?.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+            goBack?.imageView?.tintColor = .white
+            goBack?.imageView?.contentMode = .scaleAspectFill
+            goBack?.addTarget(self, action: #selector(goBackFromGroup), for: .touchUpInside)
+        }
+        
+        // Remove group
+        if counter.isGroup || counter.parent != nil {
+            removeGroup = UIButton(frame: CGRect(x: view.frame.width-80, y: 90, width: 60, height: 60))
+            removeGroup?.setImage(#imageLiteral(resourceName: "close"), for: .normal)
+            removeGroup?.imageView?.tintColor = .white
+            removeGroup?.imageView?.contentMode = .scaleAspectFill
+            removeGroup?.addTarget(self, action: #selector(remove), for: .touchUpInside)
+        }
+        
         // Gestures
         
         // Add
@@ -205,26 +269,6 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         tabsCollectionView.dataSource = self
         tabsCollectionView.backgroundColor = .clear
         
-        // Ad banner
-        if AppDelegate.shared.adBanner == nil {
-            AppDelegate.shared.adBanner = GADBannerView(adSize: kGADAdSizeBanner)
-            AppDelegate.shared.adBanner.rootViewController = self
-            AppDelegate.shared.adBanner.adUnitID = "ca-app-pub-9214899206650515/7728559868"
-            AppDelegate.shared.adBanner.load(GADRequest())
-        }
-        AppDelegate.shared.adBanner.delegate = self
-        AppDelegate.shared.adBanner.center.x = counterView.center.x
-        // Portrait
-        if orientation == .portrait || orientation == .portraitUpsideDown {
-            AppDelegate.shared.adBanner.frame.origin.y = UIScreen.main.bounds.height-(140+AppDelegate.shared.adBanner.frame.size.height)
-            
-        } else { // Landscape
-            AppDelegate.shared.adBanner.frame.origin.y = UIScreen.main.bounds.height-AppDelegate.shared.adBanner.frame.size.height
-        }
-        interceptBannerClick = UIView(frame: AppDelegate.shared.adBanner.frame)
-        interceptBannerClick.backgroundColor = .clear
-        interceptBannerClick.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showAd)))
-
         // Add subviews
         view.addSubview(countLabel)
         view.addSubview(titleLabel)
@@ -232,17 +276,24 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         view.addSubview(tabsCollectionView)
         view.addSubview(AppDelegate.shared.adBanner)
         view.addSubview(interceptBannerClick)
-        view.addGestureRecognizer(addGesture)
-        view.addGestureRecognizer(substractGesture)
-        view.addGestureRecognizer(leftGesture)
-        view.addGestureRecognizer(rightGesture)
+        if goBack != nil && removeGroup != nil {
+            view.addSubview(goBack!)
+            view.addSubview(removeGroup!)
+        }
+        
+        if !counter.isGroup {
+            view.addGestureRecognizer(addGesture)
+            view.addGestureRecognizer(substractGesture)
+            view.addGestureRecognizer(leftGesture)
+            view.addGestureRecognizer(rightGesture)
+        }
         
         view.backgroundColor = counter.color
         view.isUserInteractionEnabled = true
         
-        
         // Start animation
         if startAnimations.contains(.firstLaunch) {
+            
             let animView = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
             animView.backgroundColor = view.backgroundColor
             view.insertSubview(animView, at: 0)
@@ -308,7 +359,11 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     // -------------------------------------------------------------------------
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Counter.counters.count+1
+        if counter.isGroup || counter.parent != nil { // Hide the "Create group" cell if the counter is in a group or is a group
+            return counters.count+1
+        } else { 
+            return counters.count+2
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell { // Tab
@@ -318,19 +373,17 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath as IndexPath)
         
         cell.backgroundColor = .clear
-        
 
         // Count
         let countLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 95))
         countLabel.textAlignment = .center
         countLabel.center = cell.center
-        countLabel.text = "+"
         countLabel.textColor = .white
         countLabel.font = UIFont.boldSystemFont(ofSize: 95)
         
         // Title
         let titleBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
-        let navItem = UINavigationItem(title: Strings.addNew)
+        let navItem = UINavigationItem(title: "")
         titleBar.setItems([navItem], animated: true)
         
         // Remove all subviews
@@ -351,17 +404,28 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
             countLabel.frame.origin.y -= CGFloat(145*indexPath.row)
         }
         
-        // If the tab is not the last, put content of the counter, else, the tab is used to add a new counter
-        if indexPath.row != collectionView.numberOfItems(inSection: 0)-1 {
-            cell.backgroundColor = Counter.counters[indexPath.row].color
-            countLabel.text = "\(Counter.counters[indexPath.row].count)"
-            titleBar.topItem?.title = Counter.counters[indexPath.row].name
-            
+        if indexPath.row == counters.count { // Add new counter
+            countLabel.text = "+"
+            navItem.title = Strings.addNew
+        } else if indexPath.row == counters.count+1 { // Add new group
+            // TODO: Translate title
+            countLabel.text = "+"
+            navItem.title = "Add group"
+        } else { // Open counter
             if indexPath.row == self.counter.row {
                 let closeItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(remove))
                 titleBar.topItem?.setRightBarButton(closeItem, animated: true)
+                
+                countLabel.text = "\(counter.count)"
+                titleBar.topItem?.title = counter.name
+                cell.backgroundColor = counter.color
+            } else {
+                countLabel.text = "\(counters[indexPath.row].count)"
+                titleBar.topItem?.title = counters[indexPath.row].name
+                cell.backgroundColor = counters[indexPath.row].color
             }
         }
+        
         
         return cell
     }
@@ -372,12 +436,40 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     // -------------------------------------------------------------------------
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row != collectionView.numberOfItems(inSection: 0)-1 { // Open selected counter
-            AppDelegate.shared.switchToCounter(Counter.counters[indexPath.row])
-        } else { // Create new counter
+        if indexPath.row != counters.count && indexPath.row != counters.count+1 { // Open selected counter
+            AppDelegate.shared.switchToCounter(counters[indexPath.row])
+        } else if indexPath.row == counters.count { // Create new counter
             let newCounter = Counter(name: "\(Strings.counter) \(indexPath.row+1)", count: 0, color: view.backgroundColor!)
-            Counter.create(counter: newCounter)
+            
+            if let dir = counter.groupDirectory {
+                Counter.create(counter: newCounter, inside: dir)
+                newCounter.parent = counter
+            } else if let dir = counter.parent?.groupDirectory {
+                Counter.create(counter: newCounter, inside: dir)
+                newCounter.parent = counter.parent
+            } else {
+                Counter.create(counter: newCounter)
+            }
+
             AppDelegate.shared.switchToCounter(newCounter)
+        } else { // Create group
+            
+            // TODO: Translate "Group"
+            // FIXME: Fix row, use count of groups
+            
+            var dir = Counter.sharedDir
+            if let dir_ = counter.parent?.groupDirectory {
+                dir = dir_
+            }
+            
+            do {
+                try FileManager.default.createDirectory(atPath: dir.appendingPathComponent("Group \(indexPath.row+1)").path, withIntermediateDirectories: false, attributes: nil)
+                
+                let newCounter = try Counter(file: dir.appendingPathComponent("Group \(indexPath.row+1)"))
+                
+                AppDelegate.shared.switchToCounter(newCounter)
+                
+            } catch _ {}
         }
     }
     
@@ -386,8 +478,15 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     // -------------------------------------------------------------------------
     
     @objc func remove() { // Remove counter
-        counter.remove()
+        
+        if counter.parent != nil {
+            counter.parent!.remove()
+        } else {
+            counter.remove()
+        }
+        
         AppDelegate.shared.currentCounter = 0
+        AppDelegate.shared.currentGroup = nil
         if Counter.counters.count == 0 {
             AppDelegate.shared.updateShortcutItems()
             UIApplication.shared.keyWindow?.rootViewController = NoCountViewController()
@@ -413,7 +512,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
             
             // Check if this name already exists
             var continue_ = true
-            for counter in Counter.counters {
+            for counter in self.counters {
                 if counter.name == newName {
                     
                     let alert = UIAlertController(title: Strings.CannotRenameCounter.title, message: Strings.CannotRenameCounter.message(forCounter: counter.name), preferredStyle: .alert)
@@ -529,5 +628,18 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         view.bringSubview(toFront: interceptBannerClick)
     }
     
+    @objc func goBackFromGroup() { // Go back and leave group
+        AppDelegate.shared.currentCounter = 0
+        AppDelegate.shared.currentGroup = nil
+        
+        if Counter.counters.count > 1 {
+            let countVC = CountViewController()
+            countVC.startAnimations = [.recount]
+            UIApplication.shared.keyWindow?.rootViewController = countVC
+        } else { // There is no other counter than the current group
+            UIApplication.shared.keyWindow?.rootViewController = NoCountViewController()
+        }
+        
+    }
 }
 

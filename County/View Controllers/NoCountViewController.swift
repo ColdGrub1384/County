@@ -17,9 +17,9 @@ class NoCountViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 70))
         label.text = Strings.noCounter
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textAlignment = .center
         
         label.center = view.center

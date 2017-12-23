@@ -10,8 +10,9 @@ import UIKit
 import UserNotifications
 import Firebase
  
+
 @UIApplicationMain
- class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
@@ -22,17 +23,39 @@ import Firebase
     var currentCounter: Int { // Current selected counter
         get {
             let returnValue = Counter.userDefaults.integer(forKey: "currentCounter")
+            Counter.userDefaults.synchronize()
             return returnValue
         }
         
         set {
             Counter.userDefaults.set(newValue, forKey: "currentCounter")
+            Counter.userDefaults.synchronize()
+        }
+    }
+    
+    var currentGroup: String? { // Current selected counter
+        get {
+            let returnValue = Counter.userDefaults.string(forKey: "currentGroup")
+            return returnValue
+        }
+        
+        set {
+            Counter.userDefaults.set(newValue, forKey: "currentGroup")
+            Counter.userDefaults.synchronize()
         }
     }
     
     func switchToCounter(_ counter: Counter) { // Open a CountViewController from a counter
         currentCounter = counter.row
+        currentGroup = counter.groupDirectory?.absoluteString
+        if currentGroup == nil {
+            currentGroup = counter.parent?.groupDirectory?.absoluteString
+        }
         
+        if counter.isGroup {
+            currentCounter = -1
+        }
+
         let counterVC = CountViewController()
         
         counterVC.startAnimations = [.recount]
@@ -77,6 +100,13 @@ import Firebase
             newItem.localizedSubtitle = "\(counter.count)"
             newItem.icon = UIApplicationShortcutIcon(type: .favorite)
             
+            var lastSubtitle: String?
+            if let parent = counter.parent {
+                // TODO: Translate "In"
+                lastSubtitle = "In \(parent.name)"
+            }
+            
+            newItem.localizedSubtitle = lastSubtitle
             UIApplication.shared.shortcutItems?.append(newItem)
         }
     }
@@ -87,7 +117,7 @@ import Firebase
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+                
         FirebaseApp.configure()
         GADMobileAds.configure(withApplicationID: "ca-app-pub-9214899206650515~9762275389")
         
@@ -118,7 +148,7 @@ import Firebase
                 self.window?.rootViewController?.present(errorAlert, animated: true, completion: nil)
             }
         }
-                
+
         return true
     }
     
@@ -129,6 +159,11 @@ import Firebase
             do {
                 let counter = try Counter(file: Counter.sharedDir.appendingPathComponent(counterTitle))
                 self.currentCounter = counter.row
+                self.currentGroup = nil
+                
+                if let parent = counter.parent {
+                    self.currentGroup = parent.groupDirectory?.absoluteString
+                }
                 
                 UIApplication.shared.keyWindow?.rootViewController = CountViewController()
             } catch _ {}
