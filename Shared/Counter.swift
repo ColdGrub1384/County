@@ -47,7 +47,7 @@ class Counter {
                         
                         let content = counters(atDirectory: file)
     
-                        var color = Color(from: 0)
+                        var color = Color(from: 3)
                         if let firstCounter = content.first { color = firstCounter.color }
                         let counter = Counter(name: file.lastPathComponent, count: 0, color: color, childs: content)
                         counters_.append(counter)
