@@ -8,40 +8,24 @@
 
 import UIKit
 
-class NoCountViewController: UIViewController {
+class NoCountViewController: CountViewController {
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLoad() {
         
-        UIApplication.shared.applicationIconBadgeNumber = 0
+        // Hide animation
+        startAnimations = []
         
-        view.backgroundColor = .white
+        // Create counter to prevent the app from crashing
+        counter = Counter(name: "", count: 0, color: Color(from: 3))
         
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 70))
-        label.text = Strings.noCounter
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textAlignment = .center
+        super.viewDidLoad() // Setup the ViewController
         
-        label.center = view.center
         
-        view.addSubview(label)
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
-            for subview in self.view.subviews {
-                subview.removeFromSuperview()
-            }
-            
-            self.viewDidAppear(true)
-        })
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let counter = Counter(name: Strings.counter, count: 0, color: Color(from: 3))
-        Counter.create(counter: counter)
-        
-        UIApplication.shared.keyWindow?.rootViewController = CountViewController()
+        // Hide counter interface
+        countLabel.removeFromSuperview()
+        editTitle.removeFromSuperview()
+        titleLabel.removeFromSuperview()
+        view.gestureRecognizers = nil
     }
     
 }
