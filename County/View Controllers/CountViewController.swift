@@ -458,7 +458,20 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         if indexPath.row != counters.count && indexPath.row != counters.count+1 { // Open selected counter
             AppDelegate.shared.switchToCounter(counters[indexPath.row])
         } else if indexPath.row == counters.count { // Create new counter
-            let newCounter = Counter(name: "\(Strings.counter) \(indexPath.row+1)", count: 0, color: view.backgroundColor!)
+            
+            // Get number of counters
+            var count = 0
+            for counter in counters {
+                if !counter.isGroup {
+                    count += 1
+                }
+            }
+            var newName = "\(Strings.counter) \(count+1)"
+            if count == 0 {
+                newName = Strings.counter
+            }
+            
+            let newCounter = Counter(name: newName, count: 0, color: view.backgroundColor!)
             
             if let dir = counter.groupDirectory {
                 Counter.create(counter: newCounter, inside: dir)
@@ -473,17 +486,27 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
             AppDelegate.shared.switchToCounter(newCounter)
         } else { // Create group
             
-            // FIXME: Fix row, use count of groups
-            
             var dir = Counter.sharedDir
             if let dir_ = counter.parent?.groupDirectory {
                 dir = dir_
             }
             
             do {
-                try FileManager.default.createDirectory(atPath: dir.appendingPathComponent("\(Strings.group) \(indexPath.row+1)").path, withIntermediateDirectories: false, attributes: nil)
+                // Get number of groups
+                var count = 0
+                for counter in counters {
+                    if counter.isGroup {
+                        count += 1
+                    }
+                }
+                var newName = "\(Strings.group) \(count+1)"
+                if count == 0 {
+                    newName = Strings.group
+                }
                 
-                let newCounter = try Counter(file: dir.appendingPathComponent("\(Strings.group) \(indexPath.row+1)"))
+                try FileManager.default.createDirectory(atPath: dir.appendingPathComponent(newName).path, withIntermediateDirectories: false, attributes: nil)
+                
+                let newCounter = try Counter(file: dir.appendingPathComponent(newName))
                 
                 AppDelegate.shared.switchToCounter(newCounter)
                 
