@@ -707,13 +707,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         AppDelegate.shared.currentCounter = 0
         AppDelegate.shared.currentGroup = nil
         
-        if Counter.counters.count > 1 {
-            let countVC = CountViewController()
-            countVC.startAnimations = [.recount]
-            UIApplication.shared.keyWindow?.rootViewController = countVC
-        } else { // There is no other counter than the current group
-            UIApplication.shared.keyWindow?.rootViewController = NoCountViewController()
-        }
+        UIApplication.shared.keyWindow?.rootViewController = NoCountViewController()
         
     }
 }
