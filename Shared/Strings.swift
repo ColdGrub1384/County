@@ -22,9 +22,7 @@ class Strings {
     static let group = NSLocalizedString("group", comment: "Group of counters")
     
     static let sponsored = NSLocalizedString("sponsored", comment: "Title for maximized ad")
-    
-    static var noCounter = NSLocalizedString("createFirstCounter", comment: "Text shown when there is no counter")
-    
+        
     class ChangeTitleAlert {
         private init() {}
         

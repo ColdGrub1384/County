@@ -33,9 +33,6 @@
 /* Default counter title */
 "counter" = "Compteur";
 
-/* Text shown when there is no counter */
-"createFirstCounter" = "Touche pour créer un nouveau conteur";
-
 /* Group of counters */
 "group" = "Groupe";
 

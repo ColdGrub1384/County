@@ -33,9 +33,6 @@
 /* Default counter title */
 "counter" = "Counter";
 
-/* Text shown when there is no counter */
-"createFirstCounter" = "Tap to create a new counter";
-
 /* Group of counters */
 "group" = "Group";
 
