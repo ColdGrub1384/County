@@ -536,13 +536,30 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
                 }
             }
             
-            // Apply changes
-            if continue_ {
-                self.counter.name = newName
-                self.titleLabel.text = self.counter.name
-                self.tabsCollectionView.reloadData()
-                self.sendToWatch()
+            if newName == "" { // Continue only if the name is not empty
+                continue_ = false
+            }
+            
+            if !self.counter.isGroup { // Rename counter
+                // Apply changes
+                if continue_ {
+                    self.counter.name = newName
+                    self.titleLabel.text = self.counter.name
+                    self.tabsCollectionView.reloadData()
+                    self.sendToWatch()
+                    AppDelegate.shared.updateShortcutItems()
+                }
+            } else if let dir = self.counter.groupDirectory { // Rename group
+                let newDir = dir.deletingLastPathComponent().appendingPathComponent(newName)
+                try? FileManager.default.moveItem(at: dir, to: newDir)
+                
                 AppDelegate.shared.updateShortcutItems()
+                
+                AppDelegate.shared.currentGroup = newDir.absoluteString
+                
+                let countVC = CountViewController()
+                countVC.startAnimations = []
+                UIApplication.shared.keyWindow?.rootViewController = countVC
             }
         }))
         
