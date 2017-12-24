@@ -1,5 +1,5 @@
 
-![Icon](https://raw.githubusercontent.com/ColdGrub1384/County/master/County/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@3x.png)
+![Icon](https://raw.githubusercontent.com/ColdGrub1384/County/master/County/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png)
 
 # County - iOS and Apple Watch Counter
 
