@@ -74,7 +74,18 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         print(message)
         
         // Create counter with given data
-        let counter = Counter(name: name, count: count, color: Color(from: color))
+        var counter: Counter!
+        
+        let components = name.components(separatedBy: "/")
+        if components.count < 2 { // Is not in a group
+            counter = Counter(name: components[0], count: count, color: Color(from: color))
+        } else { // Is on a group
+            if let parent = try? Counter(file: Counter.sharedDir.appendingPathComponent(components[0])) {
+                counter = Counter(name: components[1], count: count, color: Color(from: color))
+                counter.parent = parent
+            }
+        }
+        
         Counter.create(counter: counter)
         let counterVC = CountViewController()
         counterVC.counter = counter
@@ -95,19 +106,25 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         DispatchQueue.global(qos: .background).async {
             if WCSession.isSupported() && WCSession.default.isWatchAppInstalled {
                 print("Send counter")
-                if WCSession.default.isReachable { // If Watch app is opened, send direct message
-                    WCSession.default.sendMessage(["name":self.counter.name,"count":self.counter.count,"color":Identifier(forColor: self.counter.color)], replyHandler: nil, errorHandler: nil)
-                } else {
-                    do {
-                        print("Send context instead of message")
-                        try WCSession.default.updateApplicationContext(["name":self.counter.name,"count":self.counter.count,"color":Identifier(forColor: self.counter.color)])
-                    } catch let error {
-                        print("ERROR SENDING CONTEXT: \(error.localizedDescription)")
+                
+                if !self.counter.isGroup {
+                    var name = self.counter.name
+                    if let dir = self.counter.parent?.groupDirectory {
+                        name = dir.lastPathComponent+"/"+name
+                    }
+                    
+                    if WCSession.default.isReachable { // If Watch app is opened, send direct message
+                        WCSession.default.sendMessage(["name":name,"count":self.counter.count,"color":Identifier(forColor: self.counter.color)], replyHandler: nil, errorHandler: nil)
+                    } else {
+                        do {
+                            print("Send context instead of message")
+                            try WCSession.default.updateApplicationContext(["name":name,"count":self.counter.count,"color":Identifier(forColor: self.counter.color)])
+                        } catch let error {
+                            print("ERROR SENDING CONTEXT: \(error.localizedDescription)")
+                        }
                     }
                 }
                 
-            } else {
-                print("Watch app is not installed")
             }
         }
     }
