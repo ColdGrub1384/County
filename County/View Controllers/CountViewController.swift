@@ -147,9 +147,11 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         }
         
         if counter.isGroup {
-            counters = counter.childs
+            let childs = counter.childs
+            counters = childs
         } else if let parent = counter.parent {
-            counters = parent.childs
+            let siblings = parent.childs
+            counters = siblings
         } else {
             counters = Counter.counters
         }
@@ -413,7 +415,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
             countLabel.text = "+"
             navItem.title = Strings.addGroup
         } else { // Open counter
-            if indexPath.row == self.counter.row {
+            if indexPath.row == self.counter.row && !self.counter.isGroup {
                 let closeItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(remove))
                 titleBar.topItem?.setRightBarButton(closeItem, animated: true)
                 

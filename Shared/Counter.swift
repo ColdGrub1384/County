@@ -45,7 +45,15 @@ class Counter {
                     if isDir.boolValue {
                         // Is folder
                         
-                        let content = counters(atDirectory: file)
+                        var content = counters(atDirectory: file)
+                        
+                        var i = 0
+                        for counter in content {
+                            if counter.isGroup { // A parent cannot be his own parent
+                                content.remove(at: i)
+                            }
+                            i += 1
+                        }
     
                         var color = Color(from: 3)
                         if let firstCounter = content.first { color = firstCounter.color }
@@ -154,11 +162,16 @@ class Counter {
             if isDir.boolValue {
                 // Is folder
                 
-                let content = Counter.counters(atDirectory: file)
+                var content = Counter.counters(atDirectory: file)
                 var count = 0
+                var i = 0
                 for counter_ in content {
                     count = count+counter_.count
                     counter_.parent = self
+                    if counter_.isGroup {
+                        content.remove(at: i)
+                    }
+                    i += 1
                 }
                 
                 var color = Color(from: 0)
@@ -331,6 +344,7 @@ class Counter {
     
     // Row in counters array
     var row: Int {
+    
         var i = 0
         var array = Counter.counters
         if let parent = parent {
