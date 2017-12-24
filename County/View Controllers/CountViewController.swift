@@ -345,18 +345,20 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) { // Reset counter to 0
-        if motion == .motionShake {
-            let alert = UIAlertController(title: Strings.ResetAlert.title, message: Strings.ResetAlert.message, preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: Strings.no, style: .cancel, handler: nil))
-            
-            alert.addAction(UIAlertAction(title: Strings.yes, style: .destructive, handler: { (alert) in
-                self.counter.count = 0
-                self.tabsCollectionView.reloadData()
-                self.sendToWatch()
-            }))
-            
-            self.present(alert, animated: true, completion: nil)
+        if !counter.isGroup {
+            if motion == .motionShake {
+                let alert = UIAlertController(title: Strings.ResetAlert.title, message: Strings.ResetAlert.message, preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: Strings.no, style: .cancel, handler: nil))
+                
+                alert.addAction(UIAlertAction(title: Strings.yes, style: .destructive, handler: { (alert) in
+                    self.counter.count = 0
+                    self.tabsCollectionView.reloadData()
+                    self.sendToWatch()
+                }))
+                
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
     
@@ -566,7 +568,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         }
         
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-            let newName = alert.textFields![0].text!
+            let newName = alert.textFields![0].text!.saferFilePath
             
             // Check if this name already exists
             var continue_ = true
