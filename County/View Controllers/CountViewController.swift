@@ -229,7 +229,7 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         // Remove group
         if counter.isGroup || counter.parent != nil {
-            removeGroup = UIButton(frame: CGRect(x: view.frame.width-80, y: 90, width: 60, height: 60))
+            removeGroup = UIButton(frame: CGRect(x: counterView.frame.width-80, y: 90, width: 60, height: 60))
             removeGroup?.setImage(#imageLiteral(resourceName: "close"), for: .normal)
             removeGroup?.imageView?.tintColor = .white
             removeGroup?.imageView?.contentMode = .scaleAspectFill
@@ -434,8 +434,13 @@ class CountViewController: UIViewController, UICollectionViewDelegate, UICollect
                     folderView.contentMode = .scaleAspectFit
                     cell.addSubview(folderView)
                     
-                    countLabel.frame.origin.y += 7.5
-                    countLabel.font = UIFont.boldSystemFont(ofSize: 70)
+                    if orientation == .portrait || orientation == .portraitUpsideDown {
+                        countLabel.frame.origin.y += 7.5
+                    } else {
+                        countLabel.frame.origin.y += 30
+                    }
+                    
+                    countLabel.font = UIFont.boldSystemFont(ofSize: 60)
                 }
             }
         }

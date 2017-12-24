@@ -174,7 +174,7 @@ class Counter {
                     i += 1
                 }
                 
-                var color = Color(from: 0)
+                var color = Color(from: 3)
                 if let firstCounter = content.first { color = firstCounter.color }
                 self.name_ = file.lastPathComponent
                 self.count_ = count
